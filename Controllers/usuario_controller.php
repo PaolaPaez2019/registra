@@ -11,6 +11,7 @@
 			require_once('Views/Usuario/index.php');
 		}
 
+
 		public function register(){
 			require_once('Views/Usuario/register.php');
 		}
@@ -46,35 +47,45 @@
 		require_once('../Models/usuario.php');
 
 		//se añade el archivo para la conexion
-		require_once('../connection.php');
+		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
 			$usuario= new Usuario(null,$_POST['username'],$_POST['password'],$_POST['cargo'],$_POST['nombre'],$_POST['email']);
 			$usuarioController->save($usuario);
+
 		}elseif ($_POST['action']=='update') {
 			$usuario= new Usuario($_POST['id_user'],$_POST['username'],$_POST['password'],$_POST['cargo'],$_POST['nombre'],$_POST['email']);
 			$usuarioController->update($usuario);
+
 		}elseif($_POST['action']=='login'){
 			$usuario=Usuario::login($_POST["usuario"]);
 			if($usuario->email==$_POST["usuario"] && $usuario->password==$_POST["password"]){
 			// header('Location: ../index.php');
 		  session_start();
 			$_SESSION["id_sesion"] = $usuario->cargo;
-			header('Location: ../?controller=producto&action=search_prod');
-			 }else{
-				 echo 'alert("Usuario o Contraseña Incorrecta")';
+			$_SESSION["nombre"] = $usuario->nombre;
+			if($_SESSION["id_sesion"] == "cocina"){
+					header("Location: ../?controller=producto&action=search_prod");
+			}elseif($_SESSION["id_sesion"] == "barra"){
+					header("Location: ../?controller=producto&action=search_prodBarra");
+			// header('Location: ../?controller=producto&action=search_prod');
+			}else{
+				 header('Location: ../Public/no_sesion.php');
 			}
 		}
+	}
 	}
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index') {
-			require_once('../connection.php');
+		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='ver_pedido') {
+			require_once('Config/connection.php');
 			$usuarioController=new UsuarioController();
 			//para eliminar
+
 			if ($_GET['action']=='delete') {
 				$usuarioController->delete($_GET['id']);
+
 			}elseif ($_GET['action']=='update') {//mostrar la vista update con los datos del registro actualizar
 				require_once('../Models/usuario.php');
 				$usuario=Usuario::getById($_GET['id']);

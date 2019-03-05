@@ -1,10 +1,8 @@
 <?php
-/**
-* Modelo para el acceso a la base de datos y funciones CRUD
-*/
+
 class Usuario
 {
-	//atributos
+
 	public $id_user;
 	public $username;
 	public $password;
@@ -12,9 +10,8 @@ class Usuario
 	public $nombre;
 	public $email;
 
-	//constructor de la clase
-	function __construct($id_user, $username, $password, $cargo, $nombre, $email)
-	{
+
+	function __construct($id_user, $username, $password, $cargo, $nombre, $email){
 		$this->id_user=$id_user;
 		$this->username=$username;
 		$this->password=$password;
@@ -23,20 +20,18 @@ class Usuario
 		$this->email=$email;
 	}
 
-	//función para obtener todos los usuarios
 	public static function all(){
 		$listaUsuarios =[];
 		$db=Db::getConnect();
 		$sql=$db->query('SELECT * FROM usuario');
-
-		// carga en la $listaUsuarios cada registro desde la base de datos
 		foreach ($sql->fetchAll() as $usuario) {
-			$listaUsuarios[]= new Usuario($usuario['id_user'],$usuario['username'], $usuario['password'],$usuario['cargo'],$usuario['nombre'],$usuario['email']);
+			$listaUsuarios[]= new Usuario($usuario['id_user'],$usuario['username'], $usuario['password'],
+										$usuario['cargo'],$usuario['nombre'],$usuario['email']);
 		}
 		return $listaUsuarios;
 	}
 
-	//la función para registrar un usuario
+
 	public static function save($usuario){
 			$db=Db::getConnect();
 			$insert=$db->prepare('INSERT INTO usuario VALUES(NULL,:username,:password,:cargo,:nombre,:email)');
@@ -51,7 +46,10 @@ class Usuario
 	//la función para actualizar
 	public static function update($usuario){
 		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE usuario SET username=:username, password=:password, cargo=:cargo, nombre=:nombre, email=:email WHERE id_user=:id_user');
+		$update=$db->prepare('UPDATE usuario
+							SET username=:username, password=:password, cargo=:cargo,
+							 	nombre=:nombre, email=:email
+							WHERE id_user=:id_user');
 		$update->bindValue('id_user',$usuario->id_user);
 		$update->bindValue('username',$usuario->username);
 		$update->bindValue('password',$usuario->password);
@@ -64,7 +62,6 @@ class Usuario
 	// la función para eliminar por el id
 	public static function delete($id){
 		$db=Db::getConnect();
-		//$delete=$db->prepare('DELETE FROM usuarios WHERE ID=:id');
 		$delete=$db->prepare('DELETE FROM usuario WHERE id_user=:id');
 		$delete->bindValue('id',$id);
 		$delete->execute();
@@ -74,13 +71,12 @@ class Usuario
 	public static function getById($id){
 		//buscar
 		$db=Db::getConnect();
-		//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 		$select=$db->prepare('SELECT * FROM usuario WHERE id_user=:id');
 		$select->bindValue('id',$id);
 		$select->execute();
-		//asignarlo al objeto usuario
 		$usuarioDb=$select->fetch();
-		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
+		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],
+							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
 		return $usuario;
 	}
 
@@ -92,7 +88,8 @@ class Usuario
 		$validate->execute();
 		//asignarlo al objeto usuario
 		$usuarioDb=$validate->fetch();
-		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
+		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],
+							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
 		return $usuario;
 	}
 }

@@ -45,14 +45,29 @@
 		require_once('../Models/relacion.php');
 
 		//se añade el archivo para la conexion
-		require_once('../connection.php');
+		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['id_prod'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
+			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
 			$relacionController->save($relacion);
+
 		}elseif ($_POST['action']=='update') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['id_prod'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
+			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
 			$relacionController->update($relacion);
+			
+		}elseif($_POST['action']=='updateRelation'){
+			require_once('../Models/relacion.php');
+			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
+			
+						header('Location: ../?controller=producto&action=search_prod');						
+					    // header('Location: ../?controller=producto&action=search_prodBarra');
+		
+		}elseif($_POST['action']=='updateRelationBarra'){
+			require_once('../Models/relacion.php');
+			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
+			
+						header('Location: ../?controller=producto&action=search_prodBarra');						
+					    // header('Location: ../?controller=producto&action=search_prodBarra');
 		}
 	}
 

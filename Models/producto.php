@@ -1,118 +1,166 @@
 <?php
-/**
-* Modelo para el acceso a la base de datos y funciones CRUD
-*/
+
 class Producto
 {
-	//atributos
-	public $id_prod;
-	public $descripcion;
-	public $cod_fam;
-	public $existencia;
-	public $precio_unitario;
-	public $stock_min;
-	public $stock_max;
-	public $unidad_medida;
 
-	//constructor de la clase
-	function __construct($id_prod, $descripcion, $cod_fam, $existencia, $precio_unitario, $stock_min, $stock_max, $unidad_medida)
-	{
-		$this->id_prod=$id_prod;
-		$this->descripcion=$descripcion;
-		$this->cod_fam=$cod_fam;
-		$this->existencia=$existencia;
-		$this->precio_unitario=$precio_unitario;
-		$this->stock_min=$stock_min;
-		$this->stock_max=$stock_max;
-		$this->unidad_medida=$unidad_medida;
+	public $codingre;
+	public $descrip;
+	public $familia;
+	public $unidad;
+	public $empaque;
+	public $equivale;
+	public $inventa1;
+	public $stockmax;
+	public $stockmin;
+	public $ultcosto;
+	public $costoprome;
+	public $impuesto;
+	public $pedido;
+	public $status;
+
+
+
+	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status){
+
+		$this->codingre=$codingre;
+		$this->descrip=$descrip;
+		$this->familia=$familia;
+		$this->unidad=$unidad;
+		$this->empaque=$empaque;
+		$this->equivale=$equivale;
+		$this->inventa1=$inventa1;
+		$this->stockmax=$stockmax;
+		$this->stockmin=$stockmin;
+		$this->ultcosto=$ultcosto;
+		$this->costoprome=$costoprome;
+		$this->impuesto=$impuesto;
+		$this->pedido=$pedido;
+		$this->status=$status;
 	}
-
-	//función para obtener todos los usuarios
+	
 	public static function all(){
+
 		$listaProductos =[];
 		$db=Db::getConnect();
-		$sql=$db->query('SELECT * FROM producto');
-
-		// carga en la $listaUsuarios cada registro desde la base de datos
+		$sql=$db->query('SELECT * FROM productos');
 		foreach ($sql->fetchAll() as $producto) {
-			$listaProductos[]= new Producto($producto['id_prod'],$producto['descripcion'], $producto['cod_fam'],$producto['existencia'],$producto['precio_unitario'],$producto['stock_min'],$producto['stock_max'],$producto['unidad_medida']);
+			$listaProductos[]= new Producto($producto['codingre'],$producto['descrip'], $producto['familia'],
+											$producto['unidad'],$producto['empaque'],$producto['equivale'],
+											$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
+											$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
+											$producto['pedido'],$producto['status']);
 		}
 		return $listaProductos;
 	}
 
-	//la función para registrar un usuario
+
 	public static function save($producto){
+
 			$db=Db::getConnect();
-			$insert=$db->prepare('INSERT INTO producto VALUES(NULL,:descripcion,:cod_fam,:existencia,:precio_unitario,:stock_min,:stock_max,:unidad_medida)');
-			$insert->bindValue('descripcion',$producto->descripcion);
-			$insert->bindValue('cod_fam',$producto->cod_fam);
-			$insert->bindValue('existencia',$producto->existencia);
-			$insert->bindValue('precio_unitario',$producto->precio_unitario);
-			$insert->bindValue('stock_min',$producto->stock_min);
-			$insert->bindValue('stock_max',$producto->stock_max);
-			$insert->bindValue('unidad_medida',$producto->unidad_medida);
+			$insert=$db->prepare('INSERT INTO productos
+			     				VALUES(:codingre,:descrip,:familia,
+			     							:unidad,:empaque,:equivale,
+			     							:inventa1,:stockmax,:stockmin,
+			     							:ultcosto,:costoprome,:impuesto,
+			     							:pedido,:status)');
+			$insert->bindValue('codingre',$producto->codingre);
+			$insert->bindValue('descrip',$producto->descrip);
+			$insert->bindValue('familia',$producto->familia);
+			$insert->bindValue('unidad',$producto->unidad);
+			$insert->bindValue('empaque',$producto->empaque);
+			$insert->bindValue('equivale',$producto->equivale);
+			$insert->bindValue('inventa1',$producto->inventa1);
+			$insert->bindValue('stockmax',$producto->stockmax);
+			$insert->bindValue('stockmin',$producto->stockmin);
+			$insert->bindValue('ultcosto',$producto->ultcosto);
+			$insert->bindValue('costoprome',$producto->costoprome);
+			$insert->bindValue('impuesto',$producto->impuesto);
+			$insert->bindValue('pedido',$producto->pedido);
+			$insert->bindValue('status',$producto->status);
 			$insert->execute();
 		}
 
 	//la función para actualizar
 	public static function update($producto){
+
 		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE producto
-													SET descripcion=:descripcion, cod_fam=:cod_fam, existencia=:existencia,
-			 												precio_unitario=:precio_unitario, stock_min=:stock_min, stock_max=:stock_max,
-															unidad_medida=:unidad_medida
-													WHERE id_prod=:id_prod');
-		$update->bindValue('id_prod',$producto->id_prod);
-		$update->bindValue('descripcion',$producto->descripcion);
-		$update->bindValue('cod_fam',$producto->cod_fam);
-		$update->bindValue('existencia',$producto->existencia);
-		$update->bindValue('precio_unitario',$producto->precio_unitario);
-		$update->bindValue('stock_min',$producto->stock_min);
-		$update->bindValue('stock_max',$producto->stock_max);
-		$update->bindValue('unidad_medida',$producto->unidad_medida);
+		$update=$db->prepare('UPDATE productos
+							SET descrip=:descrip, familia=:familia, unidad=:unidad,
+										empaque=:empaque, equivale=:equivale, inventa1=:inventa1,
+									stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,
+									costoprome=:costoprome,impuesto=:impuesto,pedido=:pedido,
+									status=:status
+							WHERE codingre=:codingre');
+		$update->bindValue('codingre',$producto->codingre);
+		$update->bindValue('descrip',$producto->descrip);
+		$update->bindValue('familia',$producto->familia);
+		$update->bindValue('unidad',$producto->unidad);
+		$update->bindValue('empaque',$producto->empaque);
+		$update->bindValue('equivale',$producto->equivale);
+		$update->bindValue('inventa1',$producto->inventa1);
+		$update->bindValue('stockmax',$producto->stockmax);
+		$update->bindValue('stockmin',$producto->stockmin);
+		$update->bindValue('ultcosto',$producto->ultcosto);
+		$update->bindValue('costoprome',$producto->costoprome);
+		$update->bindValue('impuesto',$producto->impuesto);
+		$update->bindValue('pedido',$producto->pedido);
+		$update->bindValue('status',$producto->status);
 		$update->execute();
 	}
-
-	// la función para eliminar por el id
-	public static function delete($id){
+	public static function updateExistencia($producto){
 		$db=Db::getConnect();
-		//$delete=$db->prepare('DELETE FROM usuarios WHERE ID=:id');
-		$delete=$db->prepare('DELETE FROM producto WHERE id_prod=:id');
-		$delete->bindValue('id',$id);
+		$update=$db->prepare('UPDATE productos
+							SET inventa1=:inventa1
+							WHERE codingre=:codingre');
+		$update->bindValue('inventa1',$producto->inventa1);
+		$update->execute();
+	}
+	// la función para eliminar por el id
+	public static function delete($codingre){
+		$db=Db::getConnect();
+		$delete=$db->prepare('DELETE FROM productos WHERE codingre=:codingre');
+		$delete->bindValue('codingre',$codingre);
 		$delete->execute();
 	}
-
 	//la función para obtener un producto por el id
-	public static function getById($id){
-		//buscar
+	public static function getById($codingre){
 		$db=Db::getConnect();
-		//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
-		$select=$db->prepare('SELECT * FROM producto WHERE id_prod=:id');
-		$select->bindValue('id',$id);
+		$select=$db->prepare('SELECT * FROM productos WHERE codingre=:codingre');
+		$select->bindValue('codingre',$codingre);
 		$select->execute();
-		//asignarlo al objeto usuario
 		$productoDb=$select->fetch();
-		$producto= new Producto($productoDb['id_prod'],$productoDb['descripcion'],$productoDb['cod_fam'],
-														$productoDb['existencia'],$productoDb['precio_unitario'],$productoDb['stock_min'],
-														$productoDb['stock_max'],$productoDb['unidad_medida']);
+		$producto= new Producto($productoDb['codingre'],$productoDb['descrip'], $productoDb['familia'],
+								$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
+				  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
+								$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
+								$productoDb['pedido'],$productoDb['status']);
+		return $producto;
+	}
+
+	public static function getByIdExistencia($codingre){
+		$db=Db::getConnect();
+		$select=$db->prepare('SELECT * FROM productos WHERE codingre=:codingre');
+		$select->bindValue('codingre',$codingre);
+		$select->execute();
+		$productoDb=$select->fetch();
+		$producto=new Producto($productoDb['inventa1']);
 		return $producto;
 	}
 
 	//la función para obtener un producto por el id
-	public static function getByFam($cod_fam){
-		//buscar
+	public static function getByFam($familia){
+
 		$listaProductos =[];
 		$db=Db::getConnect();
-		//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
-		$select=$db->prepare('SELECT * FROM producto WHERE cod_fam=:cod_fam');
-		$select->bindValue('cod_fam',$cod_fam);
+		$select=$db->prepare('SELECT * FROM productos WHERE familia=:familia');
+		$select->bindValue('familia',$familia);
 		$select->execute();
-		//asignarlo al objeto usuario
-		//$productoDb=$select->fetch();
 		foreach($select->fetchAll() as $productoDb)
-		$productos[]= new Producto($productoDb['id_prod'],$productoDb['descripcion'],$productoDb['cod_fam'],
-															 $productoDb['existencia'],$productoDb['precio_unitario'],$productoDb['stock_min'],
-															 $productoDb['stock_max'],$productoDb['unidad_medida']);
+		$productos[]= new Producto($productoDb['codingre'],$productoDb['descrip'], $productoDb['familia'],
+									$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
+					  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
+									$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
+									$productoDb['pedido'],$productoDb['status']);
 		return $productos;
 	}
 }
