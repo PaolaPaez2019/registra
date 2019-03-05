@@ -1,0 +1,23 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+		var cadena="1:10 5:15 1:20 ";
+		var id='1';
+		alert (cadena);
+		//var exp='';
+		//alert(<exp);
+		exp = new RegExp('^'+id+':[0-9]+\\s');
+		$(document).ready(function(){
+			if (cadena.match(exp)) {
+				alert("se encontró");
+				alert(cadena.replace(exp,'a'));
+			}
+			else {
+				alert("No se encontró");
+			}
+		});
+		</script>
+	</head>
+</html>
