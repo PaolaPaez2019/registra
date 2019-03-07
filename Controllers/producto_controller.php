@@ -2,6 +2,7 @@
 	class ProductoController
 	{
 		public $codingre_class;
+		public $exis;
 		public function __construct(){}
 
 		public function index(){
@@ -77,7 +78,10 @@
 			}
 		header('Location: ../index.php?controller=producto&action=search_prod');
 		}
-
+		public function ejemploAjax(){
+			$exis=$_POST['existencia'];
+			echo $exis;
+		}
 		public function registra_pedido($modificados){
 			session_start();
 			require_once('../Models/pedido.php');
@@ -145,13 +149,13 @@
 		}
 		public function search_prod_existenciasB(){
 			require_once('Views/Producto/search_prod_existenciasB.php');
-		}		
+		}
 		public function search_prodBarra(){
 			require_once('Views/Producto/search_prodBarra.php');
-		}		
+		}
 		public function search_prod_bar(){
 		require_once('Views/Producto/search_prod_bar.php');
-		}		
+		}
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
      		require_once('Views/Producto/search_prod_barra.php');
@@ -191,25 +195,39 @@
 														  $_POST['pedido'],$_POST['status']);
 			$productoController->save($producto);
 			header('Location: ../index.php?controller=producto&action=index');
-		
-		
-		}elseif ($_POST['action']=='update') {
+
+		}elseif ($_POST['action']=='reg_Inventa_Diferencia') {
+					$inventaFisico = $_POST["existencia"];
+					echo $inventaFisico;
+					//$producto= new Producto($inventaFisico);
+					//$productoController->saveInventaFisico($producto);
+					//header('Location: ../index.php?controller=producto&action=index');
+
+}elseif ($_POST['action']=='update') {
 			$producto= new Producto($_POST['codingre'],$_POST['descrip'],$_POST['familia'],
 															 $_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
 															 $_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
 															 $_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
 															 $_POST['pedido'],$_POST['status']);
 			$productoController->update($producto);
-		
-		}elseif ($_POST['action']=='updateExistencia') {
-			$producto= new Producto($_POST['inventa1']);
-			$productoController->updateExistencia($producto);
+
+	 }elseif ($_POST['action']=='updateExistencia') {
+		  // $exis=$_POST['existencia'];
+		 	 echo "hola";
+			 require_once('../Views/Producto/pro.php');
+			 //header('Location: ../index.php?controller=producto&action=ejemploAjax');
+
+			// echo $exis;
+		// };
+
+			//$producto= new Producto($_POST['inventa1']);
+			//$productoController->updateExistencia($producto);
 
 		}elseif ($_POST['action']=='search_prod'){
 			header('Location: ../index.php?controller=producto&action=search_prod_fam');
-		}elseif($_POST['action']=='search_prodBarra'){	
+		}elseif($_POST['action']=='search_prodBarra'){
 			header('Location: ../index.php?controller=producto&action=search_prod_famBarra');
-		}elseif($_POST['action']=='search_prod_famBarra'){	
+		}elseif($_POST['action']=='search_prod_famBarra'){
 			header('Location: ../index.php?controller=producto&action=search_prodBarra');
 		}elseif ($_POST['action']=='search_prod_existencias'){
 			header('Location: ../index.php?controller=producto&action=search_prod_fam_existencias');
@@ -224,7 +242,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prodBarra'&$_GET['action']!='search_prod_fam'&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='search_prod_existencias'&$_GET['action']!='search_prod_fam_existencias'&$_GET['action']!='search_prod_famBarra'&$_GET['action']!='search_prod_existenciasB') {
+		if ($_GET['action']!='register'&$_GET['action']!='ejemploAjax'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prodBarra'&$_GET['action']!='search_prod_fam'&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='search_prod_existencias'&$_GET['action']!='search_prod_fam_existencias'&$_GET['action']!='search_prod_famBarra'&$_GET['action']!='search_prod_existenciasB') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 
@@ -236,11 +254,11 @@
 				require_once('../Models/producto.php');
 				$producto=Producto::getById($_GET['codingre']);
 				require_once('../Views/Producto/update.php');
-					
+
 			}elseif ($_GET['action']=='updateExistencia') {//mostrar la vista update con los datos del registro actualizar
-				require_once('../Models/producto.php');
-				$producto=Producto::getByIdExistencia($_GET['codingre']);
-				require_once('../Views/Producto/search_prod_fam.php');	
+				 require_once('../Models/producto.php');
+				 $producto=Producto::getByIdExistencia($_GET['codingre']);
+				 require_once('../Views/Producto/search_prod_fam.php');
 			}
 
 	}

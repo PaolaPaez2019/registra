@@ -85,14 +85,13 @@ class Relacion
 						$id_and_existencia=explode(':',$datos_modificados[$i]);
 						$lista_productos[]=$id_and_existencia[0];
 						$lista_existencia[]=$id_and_existencia[1];
-						
 					}
 
 		    for($i=0; $i<count($lista_productos); $i++){
 				$db=Db::getConnect();
 		    $update=$db->prepare('UPDATE productos SET inventa1=:inventa1
 		    											WHERE codingre=:codingre');
-		   
+
 		    $update->bindValue('codingre',$codingre);
 		    $update->bindValue('codingre',$lista_productos[$i]);
 		    $update->bindValue('inventa1',$lista_existencia[$i]);

@@ -17,9 +17,8 @@ class Producto
 	public $impuesto;
 	public $pedido;
 	public $status;
-
-
-
+	// public $inventaFisico;
+	// public $diferencia;
 	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status){
 
 		$this->codingre=$codingre;
@@ -36,8 +35,10 @@ class Producto
 		$this->impuesto=$impuesto;
 		$this->pedido=$pedido;
 		$this->status=$status;
+		// $this->inventaFisico=$inventaFisico;
+		// $this->diferencia=$diferencia;
 	}
-	
+
 	public static function all(){
 
 		$listaProductos =[];
@@ -77,8 +78,18 @@ class Producto
 			$insert->bindValue('impuesto',$producto->impuesto);
 			$insert->bindValue('pedido',$producto->pedido);
 			$insert->bindValue('status',$producto->status);
+			// $insert->bindValue('status',$producto->inventaFisico);
+			// $insert->bindValue('status',$producto->diferencia);
+
 			$insert->execute();
 		}
+    //public $inventaFisico = isset($_POST["existencia"]);
+		// public static function saveInventaFisico($producto){
+		// 		$db=Db::getConnect();
+		// 		$insert=$db->prepare('INSERT INTO productos (inventaFisico) VALUES (:inventaFisico)');
+		// 		$insert->bindValue('inventaFisico',$producto->inventaFisico);
+		// 		$insert->execute();
+		// 	}
 
 	//la función para actualizar
 	public static function update($producto){

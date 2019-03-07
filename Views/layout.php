@@ -23,14 +23,14 @@
 	<!-- <p><a href='Public/cerrar_sesion.php'>Cerrar Sesion</a></p> -->
 </header>
 <body>
-			
+
 			<?php
 			switch($_SESSION["id_sesion"]){
-				
+
 				case "cocina":
 					 require_once("Views/partials/header_realiza_pedido.php");
 						break;
-				
+
 				case "barra":
 						require_once("Views/partials/header_realiza_pedidoB.php");
 						break;

@@ -38,7 +38,7 @@
 	//array con los controladores y sus respectivas acciones
 	$controllers= array(
 						'usuario'=>['index','register'],
-						'producto'=>['index','register','search_prod','search_prod_existencias','search_prod_existenciasB','search_prodBarra','search_prod_fam', 'search_prod_bar', 'search_prod_barra','search_prod_fam_existencias','search_prod_famBarra'],
+						'producto'=>['index','ejemploAjax','register','search_prod','search_prod_existencias','search_prod_existenciasB','search_prodBarra','search_prod_fam', 'search_prod_bar', 'search_prod_barra','search_prod_fam_existencias','search_prod_famBarra'],
 						'familia'=>['index','register'],
 						'pedido'=>['index','register', 'recibir_pedidos','registerOrder'],
 						'relacion'=>['index','register']

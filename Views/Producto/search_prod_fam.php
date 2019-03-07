@@ -6,18 +6,20 @@
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <script src="Public/jquery/verifica_cambio_pedido.js"></script>
+
+
 <section>
 <div class="container">
 	<div class="table-responsive">
 		<table class="table">
-			<thead class="thead-dark small">
+			<thead class="thead-dark small" >
 				<tr>
-					<th>Descripción</th>
-					<th>Inventario F�sico</th>
-					<th>Inventario Te�rico</th>
-					<th>Diferencia</th>
-					<th>Porcentaje</th>
-					
+					<th style="width:180px">Descripción</th>
+					<th style="width:">Inventario Físico</th>
+					<th style="width:px">Inventario Teórico</th>
+					<th style="width:px">Diferencia</th>
+					<th style="width:px">Porcentaje</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -28,32 +30,29 @@
 						?>
 						<tr>
 							<td class="small"><?php echo $producto->descrip?></td>
-							
+
 							<!-- <td><input class="inventa1" type="number"  value="<?php //echo $producto->inventa1;?>" name="inventa1" id="inventa1" required></td> -->
-							
-						
-							<td><input class="existencia" type="number" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1?>" required></td>
+							<td><input class="existencia" id="existencia" type="number" style="width:80px" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1?>" required></td>
 							<td class="existencia_sin_modificar"><?php echo $producto->inventa1?></td>
-							<td class="modifica"> <?php echo 0;?></td>
-							<td><?php echo "0%"; ?></td>
+							<td class="modifica" id="modifica"> <?php echo 0;?></td>
+							<td class="porcent"><?php echo "100%"; ?></td>
 						</tr>
 					<?php  }//end foreach ?>
-							 
-	 						
+
+
 			</tbody>
-		</table>		
+		</table>
 						<!-- <form action='Controllers/producto_controller.php' method='post' id="register_form_exis">
 							<input type='hidden' name='action' value='updateExistencia'>
 							<input type='hidden' name='codingre' maxlength='10' value='<?php //echo $producto->codingre; ?>'>	 -->
-					<form action="Controllers/relacion_controller.php" method="post" id="pedido_form">
-						<input type="hidden" name="action" value="updateRelation">
-						<input type="hidden" name="id_pedido" value="<?php echo $order['id_pedido'];?>" >
-						<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
-						<!-- <input type="hidden" name="total_prod" value="<?php //echo $total_prod;?>"> -->
-						<input type="hidden" name="modificados" value="" id="array_modifica">
-					
+					<form action="Controllers/producto_controller.php" method="post" id="form">
+						<input type="hidden" name="action" value="updateExistencia">
+						<input type="hidden" name="codingre" value="<?php echo $order['codingre'];?>" >
+						<!-- <input type="hidden" name="existencia" value="<?php //echo $_POST['existencia'];?>" id="existencia"> -->
+						<!-- <input type="hidden" name="diferencia" value="<?php //echo $_POST['diferencia'];?>"> -->
+
 							<center>
-								<input type="submit" value="Registrar" class="btn btn-success" onclick="foor()">
+								<input type="submit" value="Registrar" class="btn btn-success" id="btn" onclick="foor()">
 							</center>
 					</form>
 	</div>
