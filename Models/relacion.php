@@ -89,7 +89,7 @@ class Relacion
 
 		    for($i=0; $i<count($lista_productos); $i++){
 				$db=Db::getConnect();
-		    $update=$db->prepare('UPDATE productos SET inventa1=:inventa1
+		    $update=$db->prepare('UPDATE productos SET inventaFisico=:inventa1
 		    											WHERE codingre=:codingre');
 
 		    $update->bindValue('codingre',$codingre);
@@ -102,6 +102,15 @@ class Relacion
 		    // echo "Me ejecuto con normalidad";
 				}
 			}
+		 }
+
+		 public static function Diferencia($codingre){
+			 $db=Db::getConnect();
+			 $insert=$db->prepare('INSERT INTO productos VALUES (diferencia=p.inventa1-p.inventaFisico) WHERE codingre=:codingre');
+			 $insert->bindValue('codingre',$codingre);
+			 $insert->bindValue('inventa1',$inventa1);
+			 $insert->bindValue('inventaFisico',$inventaFisico);
+			 $insert->execute();
 		 }
 
 	// la función para eliminar por el id

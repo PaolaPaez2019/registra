@@ -83,6 +83,35 @@ class Producto
 
 			$insert->execute();
 		}
+
+public static function saveInventaFisico($codingre,$modificados){
+
+				if(!empty($modificados)){
+					$lista_productos=[];
+					$lista_existencia=[];
+					$datos_modificados = explode(" ",$_POST['modificados']);
+							for($i=0; $i< count($datos_modificados)-1; $i++){
+								$id_and_existencia=explode(':',$datos_modificados[$i]);
+								$lista_productos[]=$id_and_existencia[0];
+								$lista_existencia[]=$id_and_existencia[1];
+							}
+
+				    for($i=0; $i<count($lista_productos); $i++){
+						$db=Db::getConnect();
+				    $update=$db->prepare('INSERT productos (inventaFisico) VALUES inventaFisico=:inventa1
+				    											WHERE codingre=:codingre');
+
+				    $update->bindValue('codingre',$codingre);
+				    $update->bindValue('codingre',$lista_productos[$i]);
+				    $update->bindValue('inventa1',$lista_existencia[$i]);
+				    // $update->bindValue('hora_pedido',$relacion->hora_pedido);
+				    // $update->bindValue('num_prod',$lista_cantidad[$i]);
+				    // $update->bindValue('estado_prod',$relacion->estado_prod);
+				    $update->execute();
+				    // echo "Me ejecuto con normalidad";
+						}
+					}
+				}
     //public $inventaFisico = isset($_POST["existencia"]);
 		// public static function saveInventaFisico($producto){
 		// 		$db=Db::getConnect();

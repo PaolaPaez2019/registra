@@ -11,6 +11,7 @@ $(document).ready(function(){
     $(this).parents("tr").find(".existencia").css("background-color","#b8ff54");
   })
   $(".existencia").change(function(){
+    //valor de la existencia
     existencia = $(this).parents("tr").find(".existencia").val();
     //console.log(existencia);
     codingre = $(this).parents("tr").find(".existencia").attr("name");
