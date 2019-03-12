@@ -10,11 +10,11 @@
 		<table class="table">
 			<thead class="thead-dark small">
 				<tr>
-					<th>DescripciÃ³n</th>
-					<th>Inventario Físico</th>
-					<th>Inventario Teórico</th>
-					<th>Diferencia</th>
-					<th>Porcentaje</th>
+					<th >DescripciÃ³n</th>
+					<th >Inventario Físico</th>
+					<th >Inventario Teórico</th>
+					<th >Diferencia</th>
+					<th >Porcentaje</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +26,7 @@
 						<tr>
 							<td class="small"><?php echo $producto->descrip?></td>
 							<!-- <td><input class="inventa1" type="number"  value="<?php //echo $producto->inventa1;?>" name="inventa1" id="inventa1" required></td> -->
-							<td><input class="existencia" type="number" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1?>" required></td>
+							<td><input class="existencia" type="number" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1?>" style="width:34%" required></td>
 							<td class="existencia_sin_modificar"><?php echo $producto->inventa1?></td>
 							<td class="modifica"> <?php echo 0;?></td>
 							<td class="porcent"><?php echo "100%"; ?></td>
@@ -38,9 +38,10 @@
 							<input type='hidden' name='action' value='updateExistencia'>
 							<input type='hidden' name='codingre' maxlength='10' value='<?php //echo $producto->codingre; ?>'>	 -->
 					<form action="Controllers/relacion_controller.php" method="post" id="pedido_form">
-						<input type="hidden" name="action" value="updateRelation">
+						<input type="hidden" name="action" value="RegistraInventaFisico">
 						<input type="hidden" name="id_pedido" value="<?php echo $order['id_pedido'];?>" >
 						<input type="hidden" name="existencia" value="<?php echo $producto->inventa1;?>" id="costo_total_mod">
+						<input type="hidden" name="codingre" value="<?php $producto->$codingre?>">
 						<!-- <input type="hidden" name="total_prod" value="<?php //echo $total_prod;?>"> -->
 						<input type="hidden" name="modificados" value="" id="array_modifica">
 

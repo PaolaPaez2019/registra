@@ -104,14 +104,17 @@ class Relacion
 			}
 		 }
 
-		 public static function Diferencia($codingre){
-			 $db=Db::getConnect();
-			 $insert=$db->prepare('INSERT INTO productos VALUES (diferencia=p.inventa1-p.inventaFisico) WHERE codingre=:codingre');
-			 $insert->bindValue('codingre',$codingre);
-			 $insert->bindValue('inventa1',$inventa1);
-			 $insert->bindValue('inventaFisico',$inventaFisico);
-			 $insert->execute();
-		 }
+		 // public static function Diferencia($codingre){
+			//  $db=Db::getConnect();
+			 // $select=$db->prepare('SELECT SUM(inventa1-inventaFisico) FROM productos WHERE codingre=:codingre');
+			 // $select->bindValue('codingre',$codingre);
+			 // $select->execute();
+			 // $insert=$db->prepare('INSERT INTO productos (diferencia) VALUES (SELECT SUM(inventa1-inventaFisico) FROM productos WHERE codingre=:codingre)');
+			 // $insert->bindValue('codingre',$codingre);
+			 //$insert->bindValue('inventa1',$inventa1);
+			 //$insert->bindValue('inventaFisico',$inventaFisico);
+			//  $insert->execute();
+		 // }
 
 	// la función para eliminar por el id
 	public static function delete($id){

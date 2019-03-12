@@ -7,7 +7,6 @@ $(document).ready(function(){
   var cantidad_aux;
   var exp;
   //console.log(datos);
-
   //Coloca en verde todos los input
   $(".existencia").each(function(){
     $(this).parents("tr").find(".existencia").css("background-color","#b8ff54");
@@ -22,9 +21,9 @@ $(document).ready(function(){
     var existencia_sin_modificar = $(this).parents("tr").find(".existencia_sin_modificar").html();
   	var diferencia = existencia_sin_modificar-existencia;
     var porcentaje = (existencia*100)/existencia_sin_modificar;
-    $(this).parents("tr").find(".porcent").html(porcentaje+"%");
+    $(this).parents("tr").find(".porcent").html(porcentaje.toFixed(2)+"%");
 	  $(this).parents("tr").find(".modifica").html(diferencia);
-    console.log(porcentaje);
+    console.log(porcentaje.toFixed(2));
 	  console.log(existencia);
 	  //console.log(existencia_sin_modificar);
 	  console.log(diferencia);

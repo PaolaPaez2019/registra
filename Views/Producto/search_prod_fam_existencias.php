@@ -13,7 +13,8 @@
 			<thead class="thead-dark small">
 				<tr>
 					<th>Descripción</th>
-					<th>Existencia</th>
+					<th>Inventario Físico</th>
+					<th>Inventario Teórico</th>
 					<th>Codigo <br>Ingrediente</th>
 
 				</tr>
@@ -27,7 +28,7 @@
 						<tr>
 							<td class="small"><?php echo $producto->descrip?></td>
 							<!-- <td><input class="inventa1" type="number"  value="<?php //echo $producto->inventa1;?>" name="inventa1" id="inventa1" required></td> -->
-
+							<td class="small"><?php echo $producto->inventaFisico?></td>
 							<td class="small"><?php echo $producto->inventa1?></td>
 
 							<td><?php echo $producto->codingre; ?></td>

@@ -54,18 +54,12 @@
 		}elseif ($_POST['action']=='update') {
 			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
 			$relacionController->update($relacion);
-		}elseif($_POST['action']=='updateRelation'){
+		}elseif($_POST['action']=='RegistraInventaFisico'){
 			require_once('../Models/relacion.php');
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
-			Relacion::Diferencia($codingre);
 			header('Location: ../?controller=producto&action=search_prod');
-			// $dif=$_GET['diferencia'];
-			// if(isset($dif)){
-			// 	echo $dif;
-			// }
 
-
-					    // header('Location: ../?controller=producto&action=search_prodBarra');
+			// header('Location: ../?controller=producto&action=search_prodBarra');
 		}elseif($_POST['action']=='updateRelationBarra'){
 			require_once('../Models/relacion.php');
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);

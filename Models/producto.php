@@ -17,9 +17,11 @@ class Producto
 	public $impuesto;
 	public $pedido;
 	public $status;
+	public $inventaFisico;
+	public $diferencia;
 	// public $inventaFisico;
 	// public $diferencia;
-	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status){
+	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status,$inventaFisico,$diferencia){
 
 		$this->codingre=$codingre;
 		$this->descrip=$descrip;
@@ -35,6 +37,8 @@ class Producto
 		$this->impuesto=$impuesto;
 		$this->pedido=$pedido;
 		$this->status=$status;
+		$this->inventaFisico=$inventaFisico;
+		$this->diferencia=$diferencia;
 		// $this->inventaFisico=$inventaFisico;
 		// $this->diferencia=$diferencia;
 	}
@@ -49,7 +53,8 @@ class Producto
 											$producto['unidad'],$producto['empaque'],$producto['equivale'],
 											$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
 											$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-											$producto['pedido'],$producto['status']);
+											$producto['pedido'],$producto['status'],$producto['inventaFisico'],
+										  $producto['diferencia']);
 		}
 		return $listaProductos;
 	}
@@ -200,7 +205,8 @@ public static function saveInventaFisico($codingre,$modificados){
 									$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
 					  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
 									$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-									$productoDb['pedido'],$productoDb['status']);
+									$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],
+									$productoDb['diferencia']);
 		return $productos;
 	}
 }
