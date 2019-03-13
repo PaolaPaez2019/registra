@@ -8,11 +8,14 @@
 <script src="Public/jquery/verifica_cambio_pedido.js"></script>
 <section>
 <div class="container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
 	<div class="table-responsive">
 		<table class="table">
 			<thead class="thead-dark small">
 				<tr>
-					<th>Descripción</th>
+					<th width="30%">Descripción</th>
 					<th>Inventario Físico</th>
 					<th>Inventario Teórico</th>
 					<th>Codigo <br>Ingrediente</th>
@@ -47,9 +50,13 @@
 						<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
 						<!-- <input type="hidden" name="total_prod" value="<?php //echo $total_prod;?>"> -->
 						<input type="hidden" name="modificados" value="" id="array_modifica">
-
-
 					</form>
+					<div align="center">
+							<a href="javascript:window.history.back();" class="btn btn-primary">&laquo; Volver atrás</a>
+							<!-- <a href="../?controller=pedido&action=ver_pedido_cancelado_todos" class="btn btn-primary">Regresar</a> -->
+					</div>
+	</div>
+	</div>
 	</div>
 </div>
 </section>

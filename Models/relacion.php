@@ -56,6 +56,15 @@ class Relacion
 			$insert->execute();
 		}
 
+		public static function saveDiferencia($codingre){
+				// $diferencia=$inventa1-$inventaFisico;
+				$db=Db::getConnect();
+				$insert=$db->prepare('UPDATE productos SET  diferencia = (inventa1 - inventaFisico) WHERE codingre=:codingre');
+				$insert->bindValue('codingre',$codingre);
+				// $insert->bindValue('inventaFisico',$relacion->$inventaFisico);
+				// $insert->bindValue('inventa1',$relacion->$inventa1);
+				$insert->execute();
+			}
 	//la función para actualizar
 	public static function update($relacion){
 		$db=Db::getConnect();
@@ -74,6 +83,11 @@ class Relacion
 		// echo "Me ejecuto con normalidad";
 	}
 
+	public static function copyCol(){
+		$db=Db::getConnect();
+		$update=$db->prepare('UPDATE productos SET inventa1=inventaFisico');
+		$update->execute();
+	}
 	//la función para actualizar
 	public static function updateProductsOrder($codingre,$modificados){
 
@@ -89,7 +103,7 @@ class Relacion
 
 		    for($i=0; $i<count($lista_productos); $i++){
 				$db=Db::getConnect();
-		    $update=$db->prepare('UPDATE productos SET inventaFisico=:inventa1
+		    $update=$db->prepare('UPDATE productos SET inventaFisico=:inventa1, diferencia = (inventa1 - inventaFisico)
 		    											WHERE codingre=:codingre');
 
 		    $update->bindValue('codingre',$codingre);
@@ -103,18 +117,6 @@ class Relacion
 				}
 			}
 		 }
-
-		 // public static function Diferencia($codingre){
-			//  $db=Db::getConnect();
-			 // $select=$db->prepare('SELECT SUM(inventa1-inventaFisico) FROM productos WHERE codingre=:codingre');
-			 // $select->bindValue('codingre',$codingre);
-			 // $select->execute();
-			 // $insert=$db->prepare('INSERT INTO productos (diferencia) VALUES (SELECT SUM(inventa1-inventaFisico) FROM productos WHERE codingre=:codingre)');
-			 // $insert->bindValue('codingre',$codingre);
-			 //$insert->bindValue('inventa1',$inventa1);
-			 //$insert->bindValue('inventaFisico',$inventaFisico);
-			//  $insert->execute();
-		 // }
 
 	// la función para eliminar por el id
 	public static function delete($id){

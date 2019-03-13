@@ -8,14 +8,18 @@
 <script src="Public/jquery/verifica_cambio_pedido.js"></script>
 <section>
 <div class="container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
 	<div class="table-responsive">
 		<table class="table">
 			<thead class="thead-dark small">
 				<tr>
-					<th>Descripción</th>
-					<th>Existencia</th>
-					<th>Codigo <br>Ingrediente</th>
-					
+					<th >DescripciÃ³n</th>
+					<th >Inventario Físico</th>
+					<th >Inventario Teórico</th>
+					<th >Diferencia</th>
+					<th >Porcentaje</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,19 +29,19 @@
 				foreach ($productos as $producto) {
 						?>
 						<tr>
-							<td class="small"><?php echo $producto->descrip?></td>
-							<!-- <td><input class="inventa1" type="number"  value="<?php //echo $producto->inventa1;?>" name="inventa1" id="inventa1" required></td> -->
-							
-						
-							<td><input class="existencia" type="number" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1;?>" step="0.0001" required></td>
-						
-							<td><?php echo $producto->codingre; ?></td>
+
+								<td class="small"><?php echo $producto->descrip?></td>
+								<!-- <td><input class="inventa1" type="number"  value="<?php //echo $producto->inventa1;?>" name="inventa1" id="inventa1" required></td> -->
+								<td><input class="existencia" type="number" name="<?php echo $producto->codingre?>" value="<?php echo $producto->inventa1?>" style="width:60%" required></td>
+								<td class="existencia_sin_modificar"><?php echo $producto->inventa1?></td>
+								<td class="modifica"> <?php echo 0;?></td>
+								<td class="porcent"><?php echo "100%"; ?></td>
 						</tr>
 					<?php  }//end foreach ?>
-							 
-	 						
+
+
 			</tbody>
-		</table>		
+		</table>
 						<!-- <form action='Controllers/producto_controller.php' method='post' id="register_form_exis">
 							<input type='hidden' name='action' value='updateExistencia'>
 							<input type='hidden' name='codingre' maxlength='10' value='<?php //echo $producto->codingre; ?>'>	 -->
@@ -47,12 +51,15 @@
 						<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
 						<!-- <input type="hidden" name="total_prod" value="<?php //echo $total_prod;?>"> -->
 						<input type="hidden" name="modificados" value="" id="array_modifica">
-					
+
 							<center>
 								<input type="submit" value="Registrar" class="btn btn-success" onclick="foor()">
 							</center>
 					</form>
 	</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 

@@ -5,7 +5,7 @@
     </div>
     <ul class="nav">
         <li class="active"><a href="?controller=producto&action=search_prod">Realizar registro</a></li>
-        <li class="active"><a href="?controller=producto&action=search_prod_existencias">Ver existencias</a></li>
+        <li class="active"><a href="?controller=producto&action=search_prod_existencias">Ver Inventario</a></li>
 
         <!--<li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado">Pedidos autorizados</a></li>
         <li class="active"><a href="?controller=pedido&action=ver_pedido_cancelado">Pedidos cancelados</a></li>-->

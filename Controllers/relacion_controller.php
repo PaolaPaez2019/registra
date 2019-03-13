@@ -54,12 +54,15 @@
 		}elseif ($_POST['action']=='update') {
 			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
 			$relacionController->update($relacion);
+
 		}elseif($_POST['action']=='RegistraInventaFisico'){
 			require_once('../Models/relacion.php');
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
+			Relacion::copyCol();
+			//echo "Diferencia:".$diferencia;
 			header('Location: ../?controller=producto&action=search_prod');
-
 			// header('Location: ../?controller=producto&action=search_prodBarra');
+
 		}elseif($_POST['action']=='updateRelationBarra'){
 			require_once('../Models/relacion.php');
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
@@ -71,7 +74,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index') {
+		if ($_GET['action']!='register'&$_GET['action']!='index'){
 			require_once('../connection.php');
 			$relacionController=new RelacionController();
 			//para eliminar

@@ -63,6 +63,6 @@ $(document).ready(function(){
   });
 });
     function foor(){
-      alert("Las existencias se han registrado correctamente");
+      alert("¡Registrado correctamente!");
       return true;
     }
